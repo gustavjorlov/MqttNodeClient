@@ -3,7 +3,6 @@ var fs = require('fs');
 var stdin = process.openStdin();
 var config = require('./config.json');
 
-console.log(config);
 var IoTEndpoint = 'mqtt://'+config.IoTEndpoint;
 var thingName = config.thingName;
 
