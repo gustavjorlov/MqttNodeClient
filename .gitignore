@@ -3,3 +3,4 @@ certs/
 kitscerts/
 *.log
 .DS_Store
+config.json
