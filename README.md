@@ -1,5 +1,5 @@
 # Node Client for MQTT
-## Connecting to AWS IoT platform
+## Connecting to the AWS IoT platform
 
 ### Setup
 
