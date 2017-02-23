@@ -9,10 +9,15 @@
 
 ```
 {
-  "IoTEndpoint": "<Your iot endpoint url>",
-  "privatekey": "<Your private key path>",
-  "certificate": "<Your certificate path>",
-  "rootCA": "<Your root ca path>",
-  "thingName": "<Your thing name>"
+  "IoTEndpoint": "<your iot endpoint url>",
+  "privatekey": "<your private key path>",
+  "certificate": "<your certificate path>",
+  "rootCA": "<your root ca path>",
+  "thingName": "<your thing name>"
 }
 ```
+
+### Run
+
+- Run `npm run start` and start typing the `w, a, s, d` keys followed by hitting enter.
+- Watch the `$aws/things/<your thing name>/shadow/update/accepted` topic in the AWS IoT console for accepted updates to the thing shadow
