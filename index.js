@@ -7,10 +7,6 @@ var IoTEndpoint = 'mqtt://'+config.IoTEndpoint;
 var thingName = config.thingName;
 var button = require('./buttons.js');
 
-button.stream.on('changed', function(value){
-	console.log(value);
-});
-
 var certs = {
   key: fs.readFileSync(config.privatekey).toString(),
   cert: fs.readFileSync(config.certificate).toString(),
@@ -45,18 +41,30 @@ function updateThing(client, thing, payload){
   client.publish('$aws/things/'+thing+'/shadow/update', JSON.stringify({
     "state": {
       "reported" : {
-        "direction" : payload,
-        "color": "red",
-        "speed": 20
+        "direction" : payload.direction,
+        "color": payload.color,
+        "speed": payload.speed
       }
     }
   }));
 }
 
 setupAndListenToConnection(IoTEndpoint, certs, function(client){
+  var directionState = 2;
   stdin.addListener("data", function(pressedKey) {
     var direction = keyMapper(pressedKey.toString().trim());
     updateThing(client, thingName, direction);
+  });
+  button.stream.on('changed', function(value){
+	console.log(value);
+	directionState = value === 1 ? directionState + 90 : directionState;
+	directionState = directionState >= 360 ? 2 : directionState;
+	// var bb8Payload = value === 1 ? {direction: directionState, speed: 20, stop: 0} : {direction: directionState, stop: 1};
+    updateThing(client, thingName, {
+	  direction: directionState,
+	  speed: value === 1 ? 20 : 0,
+	  color: value === 1 ? "#74c689" : "#046e1f"
+	});
   });
 
   client.subscribe('direction');
