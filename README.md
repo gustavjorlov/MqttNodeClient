@@ -1,6 +1,8 @@
 # Node Client for MQTT
 ## Connecting to the AWS IoT platform
 
+This needs to run on a Raspberry Pi 3
+
 ### Setup
 
 - Create a thing in AWS IoT console and give it a name. Take note of the IoT endpoint in the IoT dashboard.
@@ -19,5 +21,5 @@
 
 ### Run
 
-- Run `npm run start` and start typing the `w, a, s, d` keys followed by hitting enter.
-- Watch the `$aws/things/<your thing name>/shadow/update/accepted` topic in the AWS IoT console for accepted updates to the thing shadow
+- Run `npm run start` and connect a button to GPIO port 12.
+- As you press your button, watch the `$aws/things/<your thing name>/shadow/update/accepted` topic in the AWS IoT console for accepted updates to the thing shadow
