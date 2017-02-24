@@ -27,10 +27,10 @@ function setupAndListenToConnection(IoTEndpoint, certs, connected){
   });
 }
 function keyMapper(key) {
-  return key === 'w' ? 'up'
-       : key === 'd' ? 'right'
-       : key === 'a' ? 'left'
-       : key === 's' ? 'down'
+  return key === 'w' ? 1
+       : key === 'd' ? 90
+       : key === 'a' ? 270
+       : key === 's' ? 180
        : null;
 }
 function printMqttMessage(topic, message){
@@ -40,7 +40,9 @@ function updateThing(client, thing, payload){
   client.publish('$aws/things/'+thing+'/shadow/update', JSON.stringify({
     "state": {
       "reported" : {
-        "direction" : payload
+        "direction" : payload,
+        "color": "red",
+        "speed": 20
       }
     }
   }));
