@@ -5,6 +5,11 @@ var config = require('./config.json');
 
 var IoTEndpoint = 'mqtt://'+config.IoTEndpoint;
 var thingName = config.thingName;
+var button = require('./buttons.js');
+
+button.stream.on('changed', function(value){
+	console.log(value);
+});
 
 var certs = {
   key: fs.readFileSync(config.privatekey).toString(),
